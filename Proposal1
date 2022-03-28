@@ -1,0 +1,61 @@
+/* Pulling information from a text file*/
+#pragma warning(disable : 4996).
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+// For rough draft one need to focus on opening an existing document
+// Reading a file
+// Implment asking for name, along with greeting of "Hello (name) would you like to read or write to a file?"
+// Would you like to open or create a new text document?
+//Create a way for the user to prompt to write/read an existing document
+
+int main(void) {
+	// Delcarations
+	FILE* spIn;
+	char numIn[1024];
+	char filename[1024];
+	char FullName[1024];
+
+
+	// Prints "enter your name" allowing the user to input their name, their name is now stored inside the FullName string
+	printf("Enter your name: ");
+	scanf("%s", &FullName);
+
+	// Next, line asks the user to enter a file location, this is then stored inside of the filename string
+
+	printf("Please Enter File Location: ", filename);
+
+	scanf("%s", filename);
+	// Below is the print inputing the string of FullName to put their name in the print. 
+	printf("Hello %s here are the contents of your file!\n", FullName);
+	printf("--------------------------------------------\n");
+
+
+	// Statements
+	// Below is beginging the process of the variable of spIn which will open a file
+	// Inside of the fopen command it has "r" which implies that it is going to read the file
+	// In addition an if statement is added to make sure that if a file cannot be opened that it returns to the user
+	// that the file could not be opened and to try another path. Along with an exit code that allows
+	// the programmer to identify where the code went wrong
+		spIn = fopen(filename, "r");
+	if (!spIn) {
+		printf("Could not open file! Please try a different path! \a\n");
+		printf("----------------------------------------\n");
+		exit(101);
+		// below is the while statement where if a file cna be found to start printing the actual 
+		// contents of the file. This is done with the fscanf.
+		// %[^\n] was a way for the compilar to understand that I want all numbers and letters being printed
+
+	}
+	while ((fscanf(spIn, "%[^\n]", &numIn)) == 1) {
+		printf( "%s\n", numIn);
+		printf("----------------------------------------\n");
+
+	}
+
+
+
+	return 0;
+}
